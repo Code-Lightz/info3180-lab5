@@ -51,10 +51,9 @@ def login():
             # You will need to import the appropriate function to do so.
             # Then store the result of that query to a `user` variable so it can be
             # passed to the login_user() method below.
-            
-            user = UserProfile.query.filter_by(username=username, password=password).first()
-
-            if user is not None:
+        
+            user = UserProfile.query.filter_by(username=username).first()
+            if user is not None and check_password_hash(user.password, password):
                 # get user id, load into session
                 login_user(user)
 
